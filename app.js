@@ -13,7 +13,7 @@ async function initApp() {
 
 // fetch-teachers function
 async function getTeachers() {
-  const response = await fetch("https://cederdorff.com/race/data/users.json");
+  const response = await fetch("https://wordpress.faveroconsuelo.com/wp-json/wp/v2/teachers?acf_format=standard");
   const data = await response.json();
   return data;
 }
@@ -34,7 +34,7 @@ function displayTeachers(teachers) {
       "beforeend",
       `
       <li>
-        ${teacher.name}
+        ${teacher.acf.name}
       </li>
       `
     );
@@ -47,13 +47,13 @@ function displayTeachersGrid(teachers) {
 
   for (const teacher of teachers) {
     teachersGrid.insertAdjacentHTML (
-      "beforeend", `
-
+      "beforeend",
+      `
       <article class="grid-item">
-        <img src="${teacher.image}" alt="${teacher.name}"  />
-        <h2>${teacher.name}</h2>
-        <p>${teacher.title}</p>
-        <a href="mailto:${teacher.mail}">${teacher.mail}</a>
+        <img src="${teacher.acf.image}" alt="${teacher.acf.name}" />
+        <h2>${teacher.acf.name}</h2>
+        <p>${teacher.acf.title}</p>
+        <a href="mailto:${teacher.acf.mail}">${teacher.acf.mail}</a>
         </article>
         `
     );
